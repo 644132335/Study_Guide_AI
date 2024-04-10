@@ -1,5 +1,22 @@
-<div>
-    <p>test works!!!!{{name}}</p>
-    <h2>{{hello()}}</h2>
-    <input type="text">
+<div class="form-container">
+    <h1>Study Guide AI</h1>
+    <h2>Please paste your article to get a study guide</h2>
+    <br>
+    <form (ngSubmit)="submitForm()">
+        <div class="row">
+            <div class="col-12"> <!-- Use grid classes here to control width -->
+                <textarea [(ngModel)]="textValue" name="text" id="text" class="form-control rounded" cols="80" rows="20" (input)="validateWordCount($event)"></textarea>
+                <div *ngIf="wordCount > 2000" style="color: red;">
+                    Word count exceeds 2000 words. Current word count: {{wordCount}}.
+                </div>
+                <div *ngIf="wordCount <= 2000" style="color: grey;">
+                    Word count: {{wordCount}}/2000
+                </div>
+                <br>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary" [disabled]="wordCount > 2000">Generate</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>

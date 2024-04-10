@@ -1,0 +1,23 @@
+.form-container {
+    color: #6d7475;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Temporarily for testing */
+    margin: 0 auto; /* Keep it centered */
+}
+
+#text {
+    color: #4f5252; /* Dark blue */
+}
+
+.btn-primary {
+    background-color: #48CAE4; /* New background color */
+    border-color: #48CAE4; /* New border color */
+}
+
+.btn-primary:hover {
+    background-color: #3aaed8 !important; /* Slightly darker shade for hover */
+    border-color: #3aaed8 !important;
+}
+

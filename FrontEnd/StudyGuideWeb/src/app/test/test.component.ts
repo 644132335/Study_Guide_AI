@@ -6,9 +6,17 @@ import { Component } from '@angular/core';
   styleUrl: './test.component.css'
 })
 export class TestComponent {
-  public name = "matt"
+  textValue = '';
+  wordCount = 0;
 
-  hello(){
-    return "hello" + this.name;
+  validateWordCount(event: any): void {
+    const words = event.target.value.split(/\s+/);
+    this.wordCount = words.filter((word: string) => word.length > 0).length;
   }
+
+  submitForm(): void {
+    console.log('Submitted:', this.textValue);
+    // Here, you can handle the form submission, like sending the text to a server.
+  }
+
 }
