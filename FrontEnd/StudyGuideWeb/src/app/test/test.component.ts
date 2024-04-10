@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-test',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './test.component.css'
 })
 export class TestComponent {
+  constructor(private dataService: DataService) {}
+
   textValue = '';
   wordCount = 0;
 
@@ -17,6 +20,9 @@ export class TestComponent {
   submitForm(): void {
     console.log('Submitted:', this.textValue);
     // Here, you can handle the form submission, like sending the text to a server.
+    this.dataService.submitForm(this.textValue).subscribe(data => {
+      this.textValue = data.content
+    })
   }
 
 }
