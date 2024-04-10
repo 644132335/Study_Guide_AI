@@ -31,12 +31,18 @@ optimized_prompt = (
 
 @app.route("/getContent", methods=["POST"])
 def handle_form_submission() -> tuple:
-    textData = request.get_data(as_text=True)
-    generatedResponse = getContentFromAI(optimized_prompt + f"'''{textData}'''")
+    data = request.get_json()
+    number = data.get("number")
+    text = data.get("text")
+    base_prompt = f"I will give you a paragraph in the delimiter. Try to generate {number} questions that test readers' understanding of the paragraph and provide solutions. "
+    optimized_prompt = (
+        base_prompt
+        + f".Please provide a response in a structured JSON format that matches the following model: {json_model}"
+    )
+    generatedResponse = getContentFromAI(optimized_prompt + f"'''{text}'''")
     extractJson = extract_json(generatedResponse)
     try:
         data = jsonify(extractJson)
-        print(data)
         return data, 200
     except Exception as e:
         data = jsonify({"error": str(e)})
