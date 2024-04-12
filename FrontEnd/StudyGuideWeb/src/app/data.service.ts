@@ -9,7 +9,11 @@ import { FlashCardData } from './flashCard';
 export class DataService {
   constructor(private http: HttpClient) {}
 
-  submitForm(text: any):Observable<FlashCardData> {
-    return this.http.get<FlashCardData>('http://localhost:5000/getContent'+'/text='+text);
+  getGeneratedContent(url:string,data: any):Observable<[FlashCardData]> {
+    return this.http.post<[FlashCardData]>(url,data);
   }
+
+
+
+
 }

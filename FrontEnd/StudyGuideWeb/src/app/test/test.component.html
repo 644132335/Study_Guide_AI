@@ -20,3 +20,15 @@
         </div>
     </form>
 </div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4" *ngFor="let i of cardResults">
+        <app-card [question]="i.question" [answer]="i.answer"></app-card>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  

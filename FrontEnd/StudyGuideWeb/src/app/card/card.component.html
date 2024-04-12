@@ -1,0 +1,20 @@
+<div class="tp-wrapper">
+	<div class="tp-box" (click)="toggleFlip()" [@flipState]="flip">
+		<div class="tp-box__side tp-box__front">
+            <h6>
+                Question:
+                <br>
+                <br>
+                {{question}}
+            </h6>
+		</div>
+		<div class="tp-box__side tp-box__back">
+        <h6>
+            Answer:
+            <br>
+            <br>
+            {{answer}}
+        </h6>
+		</div>
+	</div>
+</div>
