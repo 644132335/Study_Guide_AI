@@ -29,6 +29,11 @@ optimized_prompt = (
 )
 
 
+@app.route("/")
+def home():
+    return "Hello, World!"
+
+
 @app.route("/getContent", methods=["POST"])
 def handle_form_submission() -> tuple:
     data = request.get_json()

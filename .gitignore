@@ -1,3 +1,5 @@
 .env
 .venv
+.DS_Store
+FrontEnd/.DS_Store
 __pycache__/
