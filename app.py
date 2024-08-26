@@ -15,11 +15,20 @@ app = Flask(__name__)
 CORS(app)
 
 
+# class qaModel(BaseModel):
+#     questions: List[Dict[str, str]]
+
+# json_model = model_to_json(qaModel(questions=[{"summary"}, {"question", "answer"}]))
+
+
 class qaModel(BaseModel):
     questions: List[Dict[str, str]]
+    summary: str
 
 
-json_model = model_to_json(qaModel(questions=[{"question": "answer"}]))
+json_model = model_to_json(
+    qaModel(questions=[{"question": "answer"}], summary="summary")
+)
 
 base_prompt = "I will give you a paragraph in the delimiter. Try to generate some questions that test readers' understanding of the paragraph and provide solutions. "
 
@@ -39,13 +48,13 @@ def handle_form_submission() -> tuple:
     data = request.get_json()
     number = data.get("number")
     text = data.get("text")
-    base_prompt = f"I will give you a paragraph in the delimiter. Try to generate {number} questions that test readers' understanding of the paragraph and provide solutions. "
-    optimized_prompt = (
-        base_prompt
-        + f".Please provide a response in a structured JSON format that matches the following model: {json_model}"
+    base_prompt_for_qa = f"I will give you a passage in the delimiter. First give a summary to the passage. Then, try to generate {number} questions that test readers' understanding of the passage and provide solutions."
+    optimized_qa_prompt = (
+        base_prompt_for_qa
+        + f"Please provide a response in a structured JSON format that matches the following model: {json_model}"
     )
-    generatedResponse = getContentFromAI(optimized_prompt + f"'''{text}'''")
-    extractJson = extract_json(generatedResponse)
+    generatedQA = getContentFromAI(optimized_qa_prompt + f"'''{text}'''")
+    extractJson = extract_json(generatedQA)
     try:
         data = jsonify(extractJson)
         return data, 200

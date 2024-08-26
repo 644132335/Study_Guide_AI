@@ -21,9 +21,12 @@ def model_to_json(model_instance: BaseModel) -> str:
 def extract_json(text_response: str) -> list:
     # This pattern matches a string that starts with '{' and ends with '}'
     pattern = r"\{[^{}]*\}"
+    pattern_for_summary = r'(?<="summary":")(.*?)(?=")'
 
     matches = re.finditer(pattern, text_response)
-    json_objects = []
+    summary_match = re.search(pattern_for_summary, text_response)
+    summary = summary_match.group(0)
+    json_objects = [json.loads(f'{{"summary": "{summary}"}}')]
 
     for match in matches:
         json_str = match.group(0)
