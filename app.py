@@ -15,12 +15,6 @@ app = Flask(__name__)
 CORS(app)
 
 
-# class qaModel(BaseModel):
-#     questions: List[Dict[str, str]]
-
-# json_model = model_to_json(qaModel(questions=[{"summary"}, {"question", "answer"}]))
-
-
 class qaModel(BaseModel):
     questions: List[Dict[str, str]]
     summary: str
