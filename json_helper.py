@@ -22,8 +22,6 @@ def extract_json(text_response: str) -> dict:
     # This pattern matches a string that starts with '{' and ends with '}'
     pattern = r"\{[^{}]*\}"
     pattern_for_summary = r'(?<="summary": ")(.*?)(?=")|(?<="summary":")(.*?)(?=")'
-    print(text_response)
-
     matches = re.finditer(pattern, text_response)
     summary_match = re.search(pattern_for_summary, text_response)
     summary = summary_match.group(0)
